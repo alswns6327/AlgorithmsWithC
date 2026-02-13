@@ -131,10 +131,13 @@
     <ClCompile Include="euclid.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="multiply.c" />
+    <ClCompile Include="prime_number.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common.h" />
     <ClInclude Include="euclid.h" />
     <ClInclude Include="multiply.h" />
+    <ClInclude Include="prime_number.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
