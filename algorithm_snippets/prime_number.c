@@ -16,7 +16,7 @@ int is_prime2(int num) {
 
 	int sqrn = (int) sqrt(num);
 	for (int i = 2; i <= sqrn; i++)
-		if (sqrn % i == 0) return FALSE;
+		if (num % i == 0) return FALSE;
 	
 	return TRUE;
 }
