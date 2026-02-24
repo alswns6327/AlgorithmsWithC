@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// O(n)
 int is_prime(int num) {
 	if (num < 2) return FALSE;
 	for (int i = 2; i < num; i++) 
@@ -11,6 +12,7 @@ int is_prime(int num) {
 	return TRUE;
 }
 
+// O(·çÆ®n)
 int is_prime2(int num) {
 	if (num < 2) return FALSE;
 
