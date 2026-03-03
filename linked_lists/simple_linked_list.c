@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include "simple_linked_list.h"
 
-Node* head, * tail;
+SimPleLinkedNode* head, * tail;
 
-Node* simple_linked_head,* simple_linked_tail;
+SimPleLinkedNode* simple_linked_head,* simple_linked_tail;
 
 void init_list(void) {
-	head = (Node*)malloc(sizeof(Node));
-	tail = (Node*)malloc(sizeof(Node));
+	head = (SimPleLinkedNode*)malloc(sizeof(SimPleLinkedNode));
+	tail = (SimPleLinkedNode*)malloc(sizeof(SimPleLinkedNode));
 	head->next = tail;
 	tail->next = tail;
 	simple_linked_head = head;
 	simple_linked_tail = tail;
 }
 
-Node* insert_after(int k, Node* t) {
-	Node* new_node = (Node*)malloc(sizeof(Node));
+SimPleLinkedNode* insert_after(int k, SimPleLinkedNode* t) {
+	SimPleLinkedNode* new_node = (SimPleLinkedNode*)malloc(sizeof(SimPleLinkedNode));
 	if (!new_node) return NULL;
 	new_node->key = k;
 	new_node->next = t->next;
@@ -24,8 +24,8 @@ Node* insert_after(int k, Node* t) {
 	return new_node;
 }
 
-int delete_next(Node* t) {
-	Node* del = t->next;
+int delete_next(SimPleLinkedNode* t) {
+	SimPleLinkedNode* del = t->next;
 	if (del == tail) return 0;
 
 	t->next = del->next;
@@ -33,8 +33,8 @@ int delete_next(Node* t) {
 	return 1;
 }
 
-Node* find_node(int k) {
-	Node* s = head;
+SimPleLinkedNode* find_node(int k) {
+	SimPleLinkedNode* s = head;
 	while ((s = s->next) != tail) 
 		if (s->key == k) break;
 	
@@ -42,21 +42,21 @@ Node* find_node(int k) {
 }
 
 int delete_node(int k) {
-	Node* s = head;
+	SimPleLinkedNode* s = head;
 	while(s->next != tail && s->next->key != k)
 		s = s->next;
 	
 	
 	if (s->next == tail) return 0;
 
-	Node* del = s->next;
+	SimPleLinkedNode* del = s->next;
 	s->next = del->next;
 	free(del);
 	return 1;
 }
 
-Node* insert_node_before_k(int t, int k) {
-	Node* s = head;
+SimPleLinkedNode* insert_node_before_k(int t, int k) {
+	SimPleLinkedNode* s = head;
 	while (s->next != tail && s->next->key != k) 
 		s = s->next;
 	
@@ -64,7 +64,7 @@ Node* insert_node_before_k(int t, int k) {
 
 	if (s->next == tail) return s->next;
 
-	Node* new_node = (Node*)malloc(sizeof(Node));
+	SimPleLinkedNode* new_node = (SimPleLinkedNode*)malloc(sizeof(SimPleLinkedNode));
 	if (!new_node) return NULL;
 
 	new_node->key = t;
@@ -74,13 +74,13 @@ Node* insert_node_before_k(int t, int k) {
 	return new_node;
 }
 
-Node* ordered_insert(int k) {
-	Node* s = head;
+SimPleLinkedNode* ordered_insert(int k) {
+	SimPleLinkedNode* s = head;
 
 	while (s->next != tail && s->next->key <= k)
 		s = s->next;
 
-	Node* new_node = (Node*)malloc(sizeof(Node));
+	SimPleLinkedNode* new_node = (SimPleLinkedNode*)malloc(sizeof(SimPleLinkedNode));
 	if (!new_node) return NULL;
 
 	new_node->key = k;
@@ -90,7 +90,7 @@ Node* ordered_insert(int k) {
 	return new_node;
 }
 
-void print_list(Node* t) {
+void print_list(SimPleLinkedNode* t) {
 	printf("\n");
 	while (t != tail) {
 		printf("%-8d", t->key);
@@ -99,7 +99,7 @@ void print_list(Node* t) {
 }
 
 void delete_all(void) {
-	Node *del;
+	SimPleLinkedNode *del;
 	while (head->next != tail) {
 		del = head->next;
 		head->next = del->next;
