@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "simple_linked_list.h"
 
-SimPleLinkedNode* head, * tail;
+static SimPleLinkedNode* head, * tail;
 
 SimPleLinkedNode* simple_linked_head,* simple_linked_tail;
 
