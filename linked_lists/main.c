@@ -1,17 +1,98 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "simple_linked_list.h"
 #include "circular_linked_list.h"
 #include "doubly_linked_list.h"
+#include "namecard.h"
+#include "viewer.h"
 
 void testSimpleLinkedList(void);
 void testCircularLinkedList(void);
 void testDoublyLinkedList(void);
+void testNamecardSystem(void);
+void testViewerSystem(int argc, char** argv);
 
-int main(void) {
-	testDoublyLinkedList();
+int main(int argc, char* argv[]) {
+	testViewerSystem(argc, argv);
+	//testNamecardSystem();
+	//testDoublyLinkedList();
 	//testCircularLinkedList();
 	//testSimpleLinkedList();
 	return 0;
+}
+
+void testViewerSystem(int argc, char** argv) {
+	if (argc != 2) {
+		printf("\nUsage: TVIEW <filename.txt>");
+		exit(0);
+	}
+	strcpy(filename, argv[1]);
+	init_line();
+	load_file();
+	key_proc();
+}
+
+void testNamecardSystem(void) {
+	char* fname = "NAMECARD.DAT";
+	char name[NAME_SIZE];
+	int menu;
+	Card* t;
+	init_card();
+
+	while (1) {
+		printf("\n\nNamecard Manager System");
+		printf("\n--------------------------");
+		printf("\n1. Input");
+		printf("\n2. Delete");
+		printf("\n3. Search");
+		printf("\n4. Load");
+		printf("\n5. Save");
+		printf("\n6. List");
+		printf("\n7. Print");
+		printf("\n8. End\n");
+		input_number(&menu, 1, 8);
+		if (menu == 8) break;
+
+		switch (menu) {
+			case 1:
+				input_card();
+				break;
+			case 2:
+				input_str(name, sizeof(name), 2);
+				if (!delete_card(name))
+					printf("\n   Can't find that name.");
+				break;
+			case 3:
+				input_str(name, sizeof(name), 2);
+				t = search_card(name);
+				if (t == NULL) {
+					printf("\n Can't find that name.");
+					break;
+				}
+				print_header(stdout);
+				print_card(t, stdout);
+				break;
+			case 4:
+				load_cards(fname);
+				break;
+			case 5:
+				save_cards(fname);
+				break;
+			case 6:
+				t = card_list_head;
+				print_header(stdout);
+				while ((t = t->next) != card_list_tail)
+					print_card(t, stdout);
+				break;
+			case 7:
+				t = card_list_head;
+				print_header(stdout);
+				while ((t = t->next) != card_list_tail)
+					print_card(t, stdout);
+				break;
+		}
+	}
 }
 
 void testDoublyLinkedList (void) {

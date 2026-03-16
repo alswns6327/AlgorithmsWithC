@@ -10,6 +10,20 @@ void clear_input_buffer(void) {
 	while ((ch = getchar()) != '\n' && ch != EOF);
 }
 
+void input_number(int* num, int min, int max) {
+	while (1) {
+		if (!scanf("%d", num)) {
+			printf("\n숫자만 입력해주세요.\n");
+			clear_input_buffer();
+		}
+		else if (*num < min || *num > max)
+			printf("\n%d~%d 사이로 입력해주세요.\n", min, max);
+		else
+			break;
+	}
+	clear_input_buffer();
+}
+
 void input_str(char* str, int size, int min) {
 	size_t len;
 	while (1) {
@@ -24,7 +38,10 @@ void input_str(char* str, int size, int min) {
 		else if(len < min) {
 			printf("\n영어는 %d~%d자 한글은 %d~%d자 이내로 입력해주세요.", min, size, min, size / 2);
 		}
-		else break;
+		else {
+			str[len - 1] = '\0';
+			break;
+		}
 	}
 }
 
@@ -115,4 +132,13 @@ void load_cards(char* s) {
 		head->next = t;
 	}
 	fclose(fp);
+}
+
+void print_header(FILE* fp) {
+	fprintf(fp, "\nName                 " "Corporation           " "Telephone number    ");
+	fprintf(fp, "\n---------------------" "----------------------" "--------------------");
+}
+
+void print_card(Card* t, FILE* fp) {
+	fprintf(fp, "\n%-20s  %-20s  %-20s", t->name, t->corp, t->tel);
 }
