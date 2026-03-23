@@ -2,19 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node* head, * tail;
+LinkedNode* head, * tail, * linked_stack_head, * linked_stack_tail;
 
 void init_linked_stack(void) {
-	head = (Node*)malloc(sizeof(Node));
-	tail = (Node*)malloc(sizeof(Node));
-	if (!head || !tail) exit(1);
+	head = (LinkedNode*)malloc(sizeof(LinkedNode));
+	tail = (LinkedNode*)malloc(sizeof(LinkedNode));
+	if (!head || !tail) {
+		if(head) free(head);
+		if(tail) free(tail);
+		exit(1);
+	}
+
+	linked_stack_head = head;
+	linked_stack_tail = tail;
 
 	head->next = tail;
 	tail->next = tail;
 }
 
 int push_linked_stack(int k) {
-	Node* node = (Node*)malloc(sizeof(Node));
+	LinkedNode* node = (LinkedNode*)malloc(sizeof(LinkedNode));
 	if (!node) {
 		printf("\n Out of memory.");
 		return -1;
@@ -30,7 +37,7 @@ int pop_linked_stack(void) {
 		printf("\n Stack Underflow");
 		return -1;
 	}
-	Node* n = head->next;
+	LinkedNode* n = head->next;
 	head->next = n->next;
 	int k = n->key;
 	free(n);
@@ -38,7 +45,7 @@ int pop_linked_stack(void) {
 }
 
 void clear_linked_stack(void) {
-	Node* n;
+	LinkedNode* n;
 	while (head->next != tail) {
 		n = head->next;
 		head->next = n->next;
@@ -47,7 +54,7 @@ void clear_linked_stack(void) {
 }
 
 void print_linked_stack(void) {
-	Node* n = head;
+	LinkedNode* n = head;
 	printf("\n Top -> Bottom.");
 	while ((n = n->next) != tail) {
 		printf("%-6d", n->key);

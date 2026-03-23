@@ -1,11 +1,11 @@
 #pragma once
 
-typedef struct _node {
+typedef struct _linked_node {
 	int key;
-	struct _node* next;
-} Node;
+	struct _linked_node* next;
+} LinkedNode;
 
-extern Node* head, * tail;
+extern LinkedNode* linked_stack_head, * linked_stack_tail;
 
 void init_linked_stack(void);
 int push_linked_stack(int k);

@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ary_stack.c" />
+    <ClCompile Include="calcutil.c" />
     <ClCompile Include="linked_stack.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ary_stack.h" />
+    <ClInclude Include="calcutil.h" />
     <ClInclude Include="linked_stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
